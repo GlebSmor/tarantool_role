@@ -1,0 +1,5 @@
+---
+tarantool_listen_port: 3301
+tarantool_memtx_memory: 512 * 1024 * 1024
+tarantool_username: user 
+tarantool_password: pass

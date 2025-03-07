@@ -1,0 +1,11 @@
+box.cfg{
+    listen = {{ tarantool_listen_port }},
+    memtx_memory = {{ tarantool_memtx_memory }}
+}
+
+#create user
+box.schema.user.create('{{ tarantool_username }}', {
+    password = '{{ tarantool_password }}',
+    if_not_exists = true,
+})
+box.schema.user.grant('{{ tarantool_username }}', 'read,write,execute', 'universe')

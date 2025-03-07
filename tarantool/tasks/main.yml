@@ -1,0 +1,26 @@
+---
+- name: Install Tarantool
+  apt:
+    name: tarantool-common
+    state: present
+    update_cache: yes
+    force: yes
+
+- name: Create instance configuration directory
+  file:
+    path: /etc/tarantool/instances.enabled
+    state: directory
+    mode: '0755'
+
+- name: Deploy Tarantool instance configuration
+  template:
+    src: instance.lua.j2
+    dest: /etc/tarantool/instances.enabled/my_instance.lua
+    mode: '0644'
+  notify: Restart Tarantool
+
+- name: Enable and start Tarantool service
+  systemd:
+    name: tarantool@my_instance
+    state: started
+    enabled: yes

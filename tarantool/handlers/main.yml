@@ -1,0 +1,5 @@
+---
+- name: Restart Tarantool
+  systemd:
+    name: tarantool@my_instance
+    state: restarted
